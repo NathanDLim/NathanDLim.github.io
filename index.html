@@ -217,7 +217,7 @@
 					var saveT = value["mod"]
 					if (value["prof"] === true) {
 						saveT += this.proficiencyBonus
-						sl.fontWeight = "bold";
+						sl.style.fontWeight = "bold";
 					}
 					sv.innerHTML = value["value"] + "  (" + value["mod"] + ")  ----  " + saveT;
 					s.appendChild(sl);
