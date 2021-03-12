@@ -25,30 +25,26 @@ class Attack {
 		}
 		return roll + this.attackBonus;
 	}
+	
 	rollDamage() {
 		// Parse the string for dice and bonus
+		var parsedRoll = parseDice(this.damage)
 		var total = 0;
-		var parts = this.damage.split("+");
-		for (var p = 0; p < parts.length; p += 1) {
-			var part = parts[p].trim()
-			if (part.includes("d")) {
-				var diceParts = part.split("d")
-				if (diceParts.length != 2) {
-					console.log("Badly formatted dice");
-					return -1;
-				}
-				var dice_num = parseInt(diceParts[0]);
-				var dice = parseInt(diceParts[1]);
+		while(parsedRoll.length > 0) {
+			if (parsedRoll.length >= 2) {
+				var num_dice = parsedRoll.shift();
+				var dice = parsedRoll.shift();
 				if (this.crit) {
-					dice_num *= 2;
+					num_dice *= 2;
 				}
-				total += rollDice(dice_num, dice);
+				total += rollDice(num_dice, dice);
 			} else {
-				total += parseInt(part)
+				total += parsedRoll.shift();
 			}
 		}
 		return total;
 	}
+	
 	isCrit() { return this.crit; }
 	isCritFail() { return this.critFail; }
 	clearCrit() {
@@ -119,7 +115,6 @@ class Character {
 				this.skills[profs[i]]["prof"] = true;
 			}
 		}
-		console.log(this.skills)
 	}
 	
 	getAttributeMod(stat){
@@ -151,7 +146,6 @@ class Character {
 				this.attributes[profs[i]]["prof"] = true;
 			}
 		}
-		console.log(this.attributes)
 	}
 	
 	addAttack(val) {this.attacks.push(val);}
@@ -186,6 +180,20 @@ class Character {
 		
 		ac = document.createElement("div")
 		actext = document.createTextNode("Spell DC: " + this.spellDC)
+		ac.style.float = "left"
+		ac.appendChild(actext);
+		ac.style.padding = "10px"
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("Passive Perception: " + this.passPer)
+		ac.style.float = "left"
+		ac.appendChild(actext);
+		ac.style.padding = "10px"
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("Passive Insight: " + this.passInt)
 		ac.appendChild(actext);
 		ac.style.padding = "10px"
 		div.appendChild(ac);
@@ -264,7 +272,6 @@ class Character {
 						character = characters[c];
 					}
 				}
-				console.log(character);
 				
 				var cur_attack = character.getAttack(att_num)
 				// Get result element
@@ -327,5 +334,50 @@ class Character {
 		
 		parentNode.appendChild(div);
 	}
+	
+	createCharacterSummaryHTML(parentNode) {
+		var div = document.createElement("div")
+		var name = document.createElement("div")
+		var nametext = document.createTextNode(this.name)
+		name.appendChild(nametext);
+		div.appendChild(name);
+		
+		var ac = document.createElement("div")
+		var actext = document.createTextNode("AC: " + this.armor)
+		ac.style.float = "left"
+		ac.style.padding = "10px"
+		ac.appendChild(actext);
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("Initiative: " + this.initiative)
+		ac.style.float = "left"
+		ac.appendChild(actext);
+		ac.style.padding = "10px"
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("Spell DC: " + this.spellDC)
+		ac.style.float = "left"
+		ac.appendChild(actext);
+		ac.style.padding = "10px"
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("Passive Perception: " + this.passPer)
+		ac.style.float = "left"
+		ac.appendChild(actext);
+		ac.style.padding = "10px"
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("Passive Insight: " + this.passInt)
+		ac.appendChild(actext);
+		ac.style.padding = "10px"
+		div.appendChild(ac);
+		parentNode.appendChild(div);
+	}
+	
+	
 }
 
