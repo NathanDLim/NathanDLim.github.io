@@ -6,7 +6,8 @@ class Attack {
 		this.name = name
 		this.attackBonus = attack
 		this.damage = damage
-		this.crit - false;
+		this.crit = false;
+		this.critFail = false;
 	}
 	
 	get attack() { return this.attackBonus; }
@@ -18,6 +19,9 @@ class Attack {
 		if (roll === 20) {
 			console.log("Got a crit!")
 			this.crit = true;
+		} else if (roll === 1) {
+			console.log("Got a crit FAIL!")
+			this.critFail = true;
 		}
 		return roll + this.attackBonus;
 	}
@@ -46,7 +50,11 @@ class Attack {
 		return total;
 	}
 	isCrit() { return this.crit; }
-	clearCrit() { this.crit = false; }
+	isCritFail() { return this.critFail; }
+	clearCrit() {
+		this.crit = false;
+		this.critFail = false;
+	}
 }
 
 
@@ -85,6 +93,12 @@ class Character {
 		this.attributes["int"] = {"value":intl,"mod":mod(intl), "prof":false}
 		this.attributes["wis"] = {"value":wis,"mod":mod(wis), "prof":false}
 		this.attributes["cha"] = {"value":cha,"mod":mod(cha), "prof":false}
+	}
+	
+	setSpellStat(stat) {
+		if (stat in this.attributes) {
+			this.spellDC = 8 + this.proficiencyBonus + this.attributes[stat]["mod"]
+		}
 	}
 	
 	constructor(name){
@@ -165,6 +179,13 @@ class Character {
 		
 		ac = document.createElement("div")
 		actext = document.createTextNode("Initiative: " + this.initiative)
+		ac.style.float = "left"
+		ac.appendChild(actext);
+		ac.style.padding = "10px"
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("Spell DC: " + this.spellDC)
 		ac.appendChild(actext);
 		ac.style.padding = "10px"
 		div.appendChild(ac);
@@ -175,20 +196,25 @@ class Character {
 		var l = document.createElement("label")
 		l.innerHTML = "Attributes"
 		l.style.float = "left"
+		l.style.paddingLeft = "10px"
+		l.style.paddingRight = "30px"
 		stats.appendChild(l)
 		
 		l = document.createElement("label")
 		l.innerHTML = "Saving Throws"
 		stats.appendChild(l)
 		var statBlockDiv = document.createElement("div")
+		statBlockDiv.className = "stat-grid-container";
 		for (const [key, value] of Object.entries(this.attributes)) {
-			var s = document.createElement("div");
 			var sl = document.createElement("label");
 			sl.innerHTML = capitalize(key);
 			sl.style.padding = "5px"
 			var sv = document.createElement("label");
+			sv.className = "stat-grid";
 			var smod = document.createElement("label");
+			smod.className = "stat-grid";
 			var sthrow = document.createElement("label");
+			sthrow.className = "stat-grid";
 			var saveT = value["mod"]
 			if (value["prof"] === true) {
 				saveT += this.proficiencyBonus
@@ -198,12 +224,12 @@ class Character {
 			smod.innerHTML = "(" + value["mod"] + ")"
 			sthrow.innerHTML = saveT;
 			
-			s.appendChild(sl);
-			s.appendChild(sv);
-			s.appendChild(smod);
-			s.appendChild(sthrow);
-			stats.appendChild(s);
+			statBlockDiv.appendChild(sl);
+			statBlockDiv.appendChild(sv);
+			statBlockDiv.appendChild(smod);
+			statBlockDiv.appendChild(sthrow);
 		}
+		stats.appendChild(statBlockDiv)
 		ac.appendChild(stats);
 		ac.style.padding = "10px"
 		div.appendChild(ac);
@@ -250,6 +276,9 @@ class Character {
 				if (cur_attack.isCrit()) {
 					res[0].style.backgroundColor = "black"
 					res[0].style.color = "white"
+				} else if (cur_attack.isCritFail()) {
+					res[0].style.backgroundColor = "red"
+					res[0].style.color = "black"
 				} else {
 					res[0].style.backgroundColor = "white"
 					res[0].style.color = "black"

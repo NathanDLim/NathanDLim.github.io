@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
-   <body onload="init()">   
-      <script src="functions.js"></script>
-      <script src="character.js"></script>
-	  <div id="dice">
+	<head>
+		<link rel="stylesheet" href="style.css">
+	</head>
+   <body onload="init()">
+	    <script src="mersenne-twister.js"></script>
+        <script src="functions.js"></script>
+		<script src="character.js"></script>
+	    <div id="dice">
 		<div>
 			<button onclick="displayDiceRoll(20)">d20</button>
 			<button onclick="displayDiceRoll(12)">d12</button>
@@ -19,7 +23,7 @@
 	  </div>
 	  <div id="characterOptions">
 	  </div>
-	  <textarea id="diceResults" style="right:0;position:absolute;height:100%"></textarea>
+	  <textarea id="diceResults" style="right:0;position:absolute;"></textarea>
 	  <div id="Character"
 	  </div>
 	  

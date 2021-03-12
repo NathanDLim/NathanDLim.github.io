@@ -21,11 +21,13 @@ function logOutput(log) {
 	textarea.scrollTop = textarea.scrollHeight;
 }
 
+var twister = new MersenneTwister();
+
 function rollDice(num, max) {
 	var total = 0;
 	var log = "Rolled " + num + "d" + max + ": ";
 	for (var i = 0; i < num; i = i + 1) {
-		var roll = Math.floor(Math.random() * max) + 1;
+		var roll = Math.floor(twister.random() * max) + 1;
 		log += " " + roll;
 		total += roll;
 	}
@@ -59,10 +61,11 @@ function init() {
 	 * Signe Character
 	 *******************************************/
 	temp_c = new Character("Signe");
-	temp_c.setAttributes(18, 22, 18, 11, 8, 13);
+	temp_c.setAttributes(18, 12, 18, 11, 14, 13);
 	temp_c.setSavingThrowProficiencies(["str","con"])
 	temp_c.armor = 16;
 	temp_c.initiative = temp_c.getAttributeMod("dex");
+	temp_c.setSpellStat("wis");
 	
 	temp_c.setSkillProficiencies(["Athletics", "Arcana", "Stealth"]);
 	temp_c.passPer = temp_c.getSkillValue("Perception") + 10;

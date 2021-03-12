@@ -1,0 +1,15 @@
+.stat-grid-container {
+	display: grid;
+	grid-template-columns: 45px 8px 55px 40px;
+}
+
+.stat-grid {
+	margin: auto;
+}
+
+#diceResults {
+	height: 400px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
