@@ -95,6 +95,7 @@ function init() {
 	 *******************************************/
 	var temp_c = new Character("Oregano");
 	temp_c.setAttributes(18, 22, 7, 11, 8, 13);
+	temp_c.hp = 45;
 	temp_c.setSavingThrowProficiencies(["str","con"])
 	temp_c.armor = 18;
 	temp_c.initiative = temp_c.getAttributeMod("dex");
@@ -113,6 +114,7 @@ function init() {
 	 *******************************************/
 	temp_c = new Character("Signe");
 	temp_c.setAttributes(18, 12, 18, 11, 14, 13);
+	temp_c.hp = 34;
 	temp_c.setSavingThrowProficiencies(["str","con"])
 	temp_c.armor = 16;
 	temp_c.initiative = temp_c.getAttributeMod("dex");
@@ -132,6 +134,7 @@ function init() {
 	 *******************************************/
 	temp_c = new Character("Zahra");
 	temp_c.setAttributes(12, 14, 18, 11, 8, 13);
+	temp_c.hp = 41;
 	temp_c.setSavingThrowProficiencies(["dex","wis"])
 	temp_c.armor = 14;
 	temp_c.initiative = temp_c.getAttributeMod("dex");

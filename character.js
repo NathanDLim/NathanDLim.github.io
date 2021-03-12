@@ -62,6 +62,7 @@ class Character {
 	passInt = 0;
 	spellDC = 0;
 	proficiencyBonus = 3;
+	maxHP = 0;
 	attacks = [];
 	attributes = {};
 	skills = {"Acrobatics":{"stat":"dex", "prof":false},
@@ -108,6 +109,7 @@ class Character {
 	set passPer(val) {this.passPer = val;}
 	set passInt(val) {this.passInt = val;}
 	set spellDC(val) {this.spellDC = val;}
+	set hp(val) {this.maxHP = val;}
 	
 	setSkillProficiencies(profs) {
 		for (var i = 0; i < profs.length; i += 1) {
@@ -165,7 +167,14 @@ class Character {
 		div.appendChild(name);
 		
 		var ac = document.createElement("div")
-		var actext = document.createTextNode("AC: " + this.armor)
+		var actext = document.createTextNode("Max HP: " + this.maxHP)
+		ac.style.float = "left"
+		ac.style.padding = "10px"
+		ac.appendChild(actext);
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("AC: " + this.armor)
 		ac.style.float = "left"
 		ac.style.padding = "10px"
 		ac.appendChild(actext);
@@ -343,7 +352,14 @@ class Character {
 		div.appendChild(name);
 		
 		var ac = document.createElement("div")
-		var actext = document.createTextNode("AC: " + this.armor)
+		var actext = document.createTextNode("Max HP: " + this.maxHP)
+		ac.style.float = "left"
+		ac.style.padding = "10px"
+		ac.appendChild(actext);
+		div.appendChild(ac);
+		
+		ac = document.createElement("div")
+		actext = document.createTextNode("AC: " + this.armor)
 		ac.style.float = "left"
 		ac.style.padding = "10px"
 		ac.appendChild(actext);
