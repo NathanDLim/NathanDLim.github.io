@@ -92,9 +92,15 @@ class Character {
 		this.attributes["cha"] = {"value":cha,"mod":mod(cha), "prof":false}
 	}
 	
-	setSpellStat(stat) {
+	// Specify what stat is used for spellcasting. Automatically calculate the DC
+	// Can also add a modifier
+	setSpellStat(stat, mod) {
+		var bonus = 0;
+		if (mod != undefined) {
+			bonus = mod;
+		}
 		if (stat in this.attributes) {
-			this.spellDC = 8 + this.proficiencyBonus + this.attributes[stat]["mod"]
+			this.spellDC = 8 + this.proficiencyBonus + this.attributes[stat]["mod"] + bonus
 		}
 	}
 	
@@ -108,7 +114,6 @@ class Character {
 	set initiative(val) {this.initiative = val;}
 	set passPer(val) {this.passPer = val;}
 	set passInt(val) {this.passInt = val;}
-	set spellDC(val) {this.spellDC = val;}
 	set hp(val) {this.maxHP = val;}
 	
 	setSkillProficiencies(profs) {
@@ -391,6 +396,23 @@ class Character {
 		ac.appendChild(actext);
 		ac.style.padding = "10px"
 		div.appendChild(ac);
+		
+		// Show trained skills
+		ac = document.createElement("div")
+		var trainedSkills = "";
+		for (const [key, value] of Object.entries(this.skills)) {
+			if (value["prof"] === true) {
+				if (trainedSkills.length > 0) {
+					trainedSkills += ", "
+				}
+				trainedSkills += key
+			}
+		}
+		actext = document.createTextNode("Trained Skills: " + trainedSkills)
+		ac.appendChild(actext);
+		ac.style.padding = "10px"
+		div.appendChild(ac);
+		
 		parentNode.appendChild(div);
 	}
 	
