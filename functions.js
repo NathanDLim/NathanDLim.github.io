@@ -94,57 +94,78 @@ function init() {
 	 * Oregano Character
 	 *******************************************/
 	var temp_c = new Character("Oregano");
-	temp_c.setAttributes(18, 22, 7, 11, 8, 13);
-	temp_c.hp = 45;
+	temp_c.setAttributes(20, 16, 18, 12, 9, 7);
+	temp_c.hp = 54;
 	temp_c.setSavingThrowProficiencies(["str","con"])
 	temp_c.armor = 18;
 	temp_c.initiative = temp_c.getAttributeMod("dex");
 	
-	temp_c.setSkillProficiencies(["Athletics", "Arcana", "Sleight of Hand"]);
+	temp_c.setSkillProficiencies(["Acrobatics", "Arcana", "History", "Insight", "Intimidation"]);
 	temp_c.passPer = temp_c.getSkillValue("Perception") + 10;
 	temp_c.passInt = temp_c.getSkillValue("Insight") + 10;
 	
 	
-	temp_c.addAttack(new Attack("longsword", 8, "1d8+6"));
-	temp_c.addAttack(new Attack("hatchet", 6, "1d6+4"));
+	temp_c.addAttack(new Attack("Fire Sword", 9, "1d8+6"));
+	temp_c.addAttack(new Attack("Handaxe", 8, "1d6+4"));
 	characters.push(temp_c)
 	
 	/*******************************************
 	 * Signe Character
 	 *******************************************/
 	temp_c = new Character("Signe");
-	temp_c.setAttributes(18, 12, 18, 11, 14, 13);
-	temp_c.hp = 34;
+	temp_c.setAttributes(18, 18, 12, 10, 15, 11);
+	temp_c.hp = 51;
 	temp_c.setSavingThrowProficiencies(["str","con"])
-	temp_c.armor = 16;
+	temp_c.armor = 15;
 	temp_c.initiative = temp_c.getAttributeMod("dex");
 	temp_c.setSpellStat("wis");
 	
-	temp_c.setSkillProficiencies(["Athletics", "Arcana", "Stealth"]);
+	temp_c.setSkillProficiencies(["Animal Handling", "Athletics", "Medicine", "Religion", "Survival"]);
 	temp_c.passPer = temp_c.getSkillValue("Perception") + 10;
 	temp_c.passInt = temp_c.getSkillValue("Insight") + 10;
 	
-	temp_c.addAttack(new Attack("Longbow Normal", 9, "1d8+7"));
-	temp_c.addAttack(new Attack("Longbow Already Damaged", 9, "1d8+1d6+7"));
-	temp_c.addAttack(new Attack("hatchet", 6, "1d6+4"));
+	temp_c.addAttack(new Attack("Longbow Normal", 9, "1d8+4"));
+	temp_c.addAttack(new Attack("Longbow + Colossus Slayer", 9, "1d8+1d8+4"));
 	characters.push(temp_c)
 	
 	/*******************************************
 	 * Zahra Character
 	 *******************************************/
 	temp_c = new Character("Zahra");
-	temp_c.setAttributes(12, 14, 18, 11, 8, 13);
-	temp_c.hp = 41;
-	temp_c.setSavingThrowProficiencies(["dex","wis"])
-	temp_c.armor = 14;
+	temp_c.setAttributes(9, 20, 12, 16, 18, 7);
+	temp_c.hp = 45;
+	temp_c.setSavingThrowProficiencies(["str","dex"])
+	temp_c.armor = 18;
 	temp_c.initiative = temp_c.getAttributeMod("dex");
 	
-	temp_c.setSkillProficiencies(["Sleight of Hand", "Arcana", "Stealth", "Perception"]);
+	temp_c.setSkillProficiencies(["Athletics", "Medicine", "Perception", "Religion", "Stealth"]);
 	temp_c.passPer = temp_c.getSkillValue("Perception") + 10;
 	temp_c.passInt = temp_c.getSkillValue("Insight") + 10;
 	
-	temp_c.addAttack(new Attack("Monk", 7, "1d8+5"));
-	temp_c.addAttack(new Attack("Shortbow", 6, "1d6+4"));
+	temp_c.addAttack(new Attack("Monk", 8, "1d6+5"));
+	temp_c.addAttack(new Attack("Shortbow", 6, "1d6+5"));
+	characters.push(temp_c)
+	
+	/*******************************************
+	 * Relix Character
+	 *******************************************/
+	temp_c = new Character("Relix");
+	temp_c.setAttributes(9, 16, 16, 10, 20, 14);
+	temp_c.hp = 36;
+	temp_c.setSavingThrowProficiencies(["int","wis"])
+	temp_c.armor = 13;
+	temp_c.initiative = temp_c.getAttributeMod("dex");
+	
+	temp_c.setSkillProficiencies(["Insight", "Nature", "Perception", "Persuasion"]);
+	temp_c.passPer = temp_c.getSkillValue("Perception") + 10;
+	temp_c.passInt = temp_c.getSkillValue("Insight") + 10;
+	
+	temp_c.addAttack(new Attack("Thornwhip", 8, "2d6"));
+	temp_c.addAttack(new Attack("Sling", 6, "1d4+3"));
+	temp_c.addAttack(new Attack("Polar Bear Bite", 7, "1d8+5"));
+	temp_c.addAttack(new Attack("Polar Bear Claw", 7, "2d6+5"));
+	temp_c.addAttack(new Attack("Constrictor Snake Bite", 7, "2d6+5"));
+	temp_c.addAttack(new Attack("Constrictor Snake Constrict", 7, "2d8+5"));
 	characters.push(temp_c)
 	
 	var charOptions = document.getElementById("characterOptions");
