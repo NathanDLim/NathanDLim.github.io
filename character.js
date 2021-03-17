@@ -83,10 +83,10 @@ class Character {
 			  "Stealth":{"stat":"dex", "prof":false},
 			  "Survival":{"stat":"wis", "prof":false}};
 	
-	setAttributes(str, con, dex, intl, wis, cha) {
+	setAttributes(str, dex, con, intl, wis, cha) {
 		this.attributes["str"] = {"value":str,"mod":mod(str), "prof":false}
-		this.attributes["con"] = {"value":con,"mod":mod(con), "prof":false}
 		this.attributes["dex"] = {"value":dex,"mod":mod(dex), "prof":false}
+		this.attributes["con"] = {"value":con,"mod":mod(con), "prof":false}
 		this.attributes["int"] = {"value":intl,"mod":mod(intl), "prof":false}
 		this.attributes["wis"] = {"value":wis,"mod":mod(wis), "prof":false}
 		this.attributes["cha"] = {"value":cha,"mod":mod(cha), "prof":false}

@@ -115,7 +115,7 @@ function init() {
 	temp_c = new Character("Signe");
 	temp_c.setAttributes(18, 18, 12, 10, 15, 11);
 	temp_c.hp = 51;
-	temp_c.setSavingThrowProficiencies(["str","con"])
+	temp_c.setSavingThrowProficiencies(["str","dex"])
 	temp_c.armor = 15;
 	temp_c.initiative = temp_c.getAttributeMod("dex");
 	temp_c.setSpellStat("wis");
