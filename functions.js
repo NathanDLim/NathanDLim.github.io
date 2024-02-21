@@ -58,6 +58,7 @@ function rollDice(num, max) {
 	var log = "Rolled " + num + "d" + max + ": ";
 	for (var i = 0; i < num; i = i + 1) {
 		var roll = Math.floor(twister.random() * max) + 1;
+		roll = 10.5
 		log += " " + roll;
 		total += roll;
 	}
